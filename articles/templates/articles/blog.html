@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+<!doctype html>
+
+{% block content %}
+
+<div class="wrap full-wrap">
+    <div class="main-wrap">
+        <section class="main main-archive">
+
+            <article class="post result">
+                <div class="inner">
+                    <h1 class="searching">Blog</h1>
+                    <p>A Great description would go in here</p>
+                </div>
+            </article>
+              {% for article in barticles %}
+            <div class="loop">
+                <article class="post format-gallery post_format-post-format-gallery">
+
+
+
+                    <a href="{% url 'articles:detail' slug=article.slug %}"
+                       title="{{ article.title }}">
+                        <div class="part-gallery">
+                            <div class="flexslider">
+                                <ul class="slides">
+
+                                    <li><span class="post-image"><img src="{{ article.image_1.url }}"
+                                                                      alt="Run-3"/></span></li>
+                                    <li><span class="post-image"><img src="{{ article.image_2.url }}"
+                                                                      alt="Run-1"/></span></li>
+                                    <li><span class="post-image"><img src="{{ article.image_3.url }}"
+                                                                      alt="Run-2"/></span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </a>
+
+                    <div class="inner">
+
+                        <h2 class="entry-title">
+                              <div class="article">
+                                  <h2><a href="{% url 'articles:detail' slug=article.slug %}">{{ article.title }}</a></h2>
+
+                        </h2>
+                        <ul class="meta top">
+                            <li class="time">
+                                <a href="{% url 'articles:detail' slug=article.slug %}"
+                                   title="{{ article.title }}">
+                                    <time class="post-date updated" datetime="2015-02-01">{{ article.date }}</time>
+                                </a></li>
+
+                            <li class="comments post-tags">
+                                <a href="#">{{ article.comment_count }} Comments</a></li>
+
+                            <li class="author-m post-tags">
+                                By <span class="vcard author post-author"><span class="fn"><a
+                                    href="{% url 'about' %}"
+                                    title="Posts by {{ article.author }} " rel="author">{{ article.author }}</a></span></span>
+                            </li>
+
+                        </ul>
+                        <div class="post-content">
+                            <p>{{ article.content }}</p>
+                            <blockquote><p>“{{ article.body }}”<cite>{{ article.author }}</cite></p></blockquote>
+                            <p><a
+                                        href="{% url 'articles:detail' slug=article.slug %}"
+                                        class="more-link">Read More</a></p>
+                        </div>
+
+
+                        <ul class="meta bottom">
+
+
+                            <li class="cat post-tags">Saved: <a
+                                    href="{% url 'articles:list' %}">Blog</a>,
+                                <a href="#">Fitness</a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+
+                </article>
+            </div>
+              {% endfor %}
+        </section>
+    </div><!-- /main-wrap -->
+</div><!-- /wrap -->
+
+{% endblock content %}
